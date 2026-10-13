@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4f0">
+  <meta name="description" content="Trace Workroom — 逐字稿與訪談整理、脈絡研究報告，以及一對一跨工具工作協作。將分散的內容整理成可以理解、確認與繼續工作的成果。">
+  <title>Trace Workroom — Research · Structure · Collaboration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body data-theme="warm">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#home" aria-label="Trace Workroom homepage"><span class="brand-mark">t<span class="brand-dot">.</span></span><span class="brand-word">trace<span class="brand-light">/workroom</span></span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#home" data-nav="home" data-i18n="navHome">首頁</a>
+        <a href="#work" data-nav="work" data-i18n="navWork">作品</a>
+      </nav>
+      <div class="header-tools">
+        <div class="seg-control lang-control" role="group" aria-label="Language"><button type="button" data-lang="zh" class="selected">中</button><button type="button" data-lang="en">EN</button></div>
+        <div class="theme-wrap">
+          <button class="theme-trigger" id="theme-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select appearance"><span class="theme-indicator"></span><span data-i18n="appearance">外觀</span><span class="chev">⌄</span></button>
+          <div class="theme-menu" id="theme-menu" hidden>
+            <button type="button" data-theme-option="warm"><span class="swatch warm"></span><span data-i18n="themeWarm">暖白</span><span class="theme-check">✓</span></button>
+            <button type="button" data-theme-option="dark"><span class="swatch dark"></span><span data-i18n="themeDark">深夜</span><span class="theme-check">✓</span></button>
+            <button type="button" data-theme-option="blue"><span class="swatch blue"></span><span data-i18n="themeBlue">灰藍</span><span class="theme-check">✓</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main id="content" tabindex="-1"></main>
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-lead">
+        <span class="eyebrow"><span class="live-dot"></span><span data-i18n="footerLabel">一起工作 / LET'S WORK</span></span>
+        <h2 data-i18n="footerTitle">從一段混亂的資訊，<br>開始一場有方向的合作。</h2>
+        <a class="footer-email" href="mailto:gabrielchun336@gmail.com">gabrielchun336@gmail.com <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TRACE WORKROOM <span class="copyright-extra" data-i18n="footerBy">/ by Gabriel Chung</span></span>
+        <div class="footer-links">
+          <a href="https://www.threads.com/@nextstop.live" target="_blank" rel="noopener noreferrer">Threads ↗</a>
+          <a href="https://www.instagram.com/nextstop.live/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+          <a href="https://github.com/Gabriel-chun" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+        <a class="back-top" href="#home" data-i18n="backTop">回到首頁 ↑</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
