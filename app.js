@@ -59,7 +59,19 @@
       note:'Demos use public, simulated or de-identified materials. Collaboration begins with a discussion of scope, source material and confidentiality.'
     }
   };
-  let lang = localStorage.getItem('trace-lang') === 'en' ? 'en' : 'zh';
+  // Order: explicit URL override > manual preference > browser language > Cloudflare country.
+  // Automatic selections are never saved as preferences.
+  const urlLocale = new URLSearchParams(location.search).get('lang');
+  const queryLocale = urlLocale === 'en' ? 'en' : (urlLocale === 'zh' || urlLocale === 'zh-Hant') ? 'zh' : null;
+  let savedLocale = null;
+  try {
+    const explicit = localStorage.getItem('trace-explicit-lang');
+    if (explicit === 'en' || explicit === 'zh') savedLocale = explicit;
+  } catch {}
+  const firstBrowserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+  const browserLocale = /^zh(?:-|$)/i.test(firstBrowserLanguage) ? 'zh' : /^en(?:-|$)/i.test(firstBrowserLanguage) ? 'en' : null;
+  const needsGeoFallback = !(queryLocale || savedLocale || browserLocale);
+  let lang = queryLocale || savedLocale || browserLocale || 'en';
   let theme = ['warm','dark','blue'].includes(localStorage.getItem('trace-theme')) ? localStorage.getItem('trace-theme') : 'warm';
   const main = document.getElementById('content');
   const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -97,7 +109,16 @@
     themeButtons.forEach(el=>{el.classList.toggle('selected',el.dataset.themeOption===theme);el.setAttribute('aria-pressed',String(el.dataset.themeOption===theme))});
   }
   function applyTheme(next) { theme=next; document.body.dataset.theme=theme; localStorage.setItem('trace-theme',theme); const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==='dark'?'#181b1e':theme==='blue'?'#e7ebf0':'#f7f4f0';render(); }
-  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;localStorage.setItem('trace-lang',lang);render()}));
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{
+    lang=b.dataset.lang;
+    try { localStorage.setItem('trace-explicit-lang',lang); } catch {}
+    const url = new URL(location.href);
+    if (url.searchParams.has('lang')) {
+      url.searchParams.set('lang',lang);
+      history.replaceState(null,'',url);
+    }
+    render();
+  }));
   const trigger=document.getElementById('theme-trigger'),menu=document.getElementById('theme-menu');
   trigger.addEventListener('click',()=>{menu.hidden=!menu.hidden;trigger.setAttribute('aria-expanded',String(!menu.hidden))});
   document.querySelectorAll('[data-theme-option]').forEach(b=>b.addEventListener('click',()=>{menu.hidden=true;trigger.setAttribute('aria-expanded','false');applyTheme(b.dataset.themeOption)}));
@@ -105,4 +126,15 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.hidden=true;trigger.setAttribute('aria-expanded','false');trigger.focus()}});
   window.addEventListener('hashchange',()=>{render();window.scrollTo({top:0,behavior:'instant'})});
   applyTheme(theme);
+  if (needsGeoFallback) {
+    fetch('/api/locale',{cache:'no-store'})
+      .then(r=>r.ok?r.json():null)
+      .then(data=>{
+        if(!data || !['zh','en'].includes(data.lang)) return;
+        let manual=null;
+        try {manual=localStorage.getItem('trace-explicit-lang');}catch{}
+        if(!manual && data.lang!==lang) {lang=data.lang;render();}
+      })
+      .catch(()=>{});
+  }
 })();
