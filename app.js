@@ -5,7 +5,8 @@
     information:'https://work-information-support.gabrielchun336.workers.dev/',
     research:'https://content-research-demo.gabrielchun336.workers.dev/',
     thought:'https://thought-flow-profile-07.chungkang.chatgpt.site/#work',
-    next:'https://next-stop-live.chungkang.chatgpt.site/'
+    next:'https://next-stop-live.chungkang.chatgpt.site/',
+    gpo:'/gpo-portfolio.html'
   };
   const T = {
     zh: {
@@ -30,6 +31,7 @@
       caseOneTitle:'Work Information Support',caseOneDesc:'從婚禮／活動情境的自然語言，辨認人物、期限、決策與待確認事項，再整理成可追蹤的工作資料結構。',caseOneResult:'展示能力：資訊抽取、人工核對、任務與狀態交接。',
       caseTwoTitle:'Content Research / Work Method',caseTwoDesc:'讓隨機、混雜的口語資料先被保留，再依工作線重新整理脈絡與狀態，避免過早把所有內容簡化成待辦。',caseTwoResult:'展示能力：脈絡整理、狀態映射、研究資訊架構。',
       caseThreeTitle:'Thought Flow Profile 07',caseThreeDesc:'公開安全的語意工作流展示。從原始捕捉、語意分段與歧義確認，到可交付成果，並延伸至 Transcript Lab。',caseThreeResult:'展示能力：逐字稿品質、語意確認、研究與交付流程。',
+      caseFiveTitle:'Global Project Overview',caseFiveDesc:'以跨對話思考延續性為核心，將每日自然語言快照整理成可追溯的語意節點、時間軸與版本比較；包含資訊架構、互動設計與 Design System。',caseFiveResult:'展示能力：UX 研究、資訊架構、互動視覺化、設計系統與產品實作。',
       caseFourTitle:'Next Stop Live',caseFourDesc:'個人的音樂、演出與城市探索專案。從音樂發現、活動資訊到旅行筆記，嘗試將分散的內容連成讀者能使用的探索路徑。',caseFourResult:'展示能力：內容策劃、資訊設計、獨立專案實踐。',
       note:'作品使用公開展示頁、模擬材料或去識別化案例。若要討論實際合作，我們會先確認範圍、素材與保密需求。'
     },
@@ -55,6 +57,7 @@
       caseOneTitle:'Work Information Support',caseOneDesc:'An event-planning example: identifying people, dates, decisions and pending items in conversational updates, then transforming them into trackable records.',caseOneResult:'Focus: information extraction, human verification and handoff.',
       caseTwoTitle:'Content Research / Work Method',caseTwoDesc:'An approach that preserves messy natural language and reconnects it to separate working threads, instead of prematurely converting everything into a checklist.',caseTwoResult:'Focus: context analysis, state mapping and information architecture.',
       caseThreeTitle:'Thought Flow Profile 07',caseThreeDesc:'A public-safe semantic workflow demo, from capturing raw language and verifying ambiguity to handoff-ready results and transcript quality checks.',caseThreeResult:'Focus: transcript quality, semantic verification and research workflows.',
+      caseFiveTitle:'Global Project Overview',caseFiveDesc:'A continuity-focused workspace that turns daily conversational snapshots into traceable semantic nodes, a timeline and version comparison, supported by interaction design and a shared design system.',caseFiveResult:'Focus: UX research, information architecture, interactive visualization and product implementation.',
       caseFourTitle:'Next Stop Live',caseFourDesc:'An independent editorial project connecting music discovery, live events and city exploration into useful pathways for readers.',caseFourResult:'Focus: editorial planning, information design and independent delivery.',
       note:'Demos use public, simulated or de-identified materials. Collaboration begins with a discussion of scope, source material and confidentiality.'
     }
@@ -93,9 +96,10 @@
       ['01',d.caseOneTitle,d.caseOneDesc,d.caseOneResult,urls.information,d.demo,'RESEARCH / OPERATIONS'],
       ['02',d.caseTwoTitle,d.caseTwoDesc,d.caseTwoResult,urls.research,d.demo,'CONTEXT / MAPPING'],
       ['03',d.caseThreeTitle,d.caseThreeDesc,d.caseThreeResult,urls.thought,d.demo,'TRANSCRIPT / SEMANTICS'],
-      ['04',d.caseFourTitle,d.caseFourDesc,d.caseFourResult,urls.next,d.project,'EDITORIAL / PERSONAL']
+      ['04',d.caseFourTitle,d.caseFourDesc,d.caseFourResult,urls.next,d.project,'EDITORIAL / PERSONAL'],
+      ['05',d.caseFiveTitle,d.caseFiveDesc,d.caseFiveResult,urls.gpo,d.project,'UX / PRODUCT DESIGN']
     ];
-    return '<div class="page-work fade-up"><section class="work-intro"><div class="container"><span class="eyebrow"><span class="live-dot"></span>'+d.workIntroLabel+'</span><h1>'+d.workIntroTitle+'</h1><p>'+d.workIntroDesc+'</p></div></section><section class="work-list"><div class="container">'+cases.map(c=>'<article class="case-card"><span class="case-index">'+c[0]+' / 04</span><div><span class="card-meta">'+c[5]+'</span><h2>'+c[1]+'</h2><p>'+c[2]+'</p><p class="case-result">'+c[3]+'</p></div><div class="case-side"><span class="case-type">'+c[6]+'</span><a class="case-link" href="'+c[4]+'" target="_blank" rel="noopener noreferrer">'+d.openProject+'</a></div></article>').join('')+'<div class="callout-note"><span class="note-mark" aria-hidden="true">✳</span><p>'+d.note+'</p></div></div></section></div>';
+    return '<div class="page-work fade-up"><section class="work-intro"><div class="container"><span class="eyebrow"><span class="live-dot"></span>'+d.workIntroLabel+'</span><h1>'+d.workIntroTitle+'</h1><p>'+d.workIntroDesc+'</p></div></section><section class="work-list"><div class="container">'+cases.map(c=>'<article class="case-card"><span class="case-index">'+c[0]+' / '+cases.length.toString().padStart(2,'0')+'</span><div><span class="card-meta">'+c[5]+'</span><h2>'+c[1]+'</h2><p>'+c[2]+'</p><p class="case-result">'+c[3]+'</p></div><div class="case-side"><span class="case-type">'+c[6]+'</span><a class="case-link" href="'+c[4]+'" target="_blank" rel="noopener noreferrer">'+d.openProject+'</a></div></article>').join('')+'<div class="callout-note"><span class="note-mark" aria-hidden="true">✳</span><p>'+d.note+'</p></div></div></section></div>';
   }
   function render() {
     const d=T[lang], route=location.hash==='#work'?'work':'home';
